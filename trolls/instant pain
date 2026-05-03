@@ -1,0 +1,32 @@
+function instantPain() {
+    // red flash overlay
+    let flash = document.createElement("div");
+    flash.style.position = "fixed";
+    flash.style.top = "0";
+    flash.style.left = "0";
+    flash.style.width = "100%";
+    flash.style.height = "100%";
+    flash.style.background = "red";
+    flash.style.opacity = "0.4";
+    flash.style.zIndex = "9999";
+    flash.style.pointerEvents = "none";
+    document.body.appendChild(flash);
+
+    // screen shake
+    let start = Date.now();
+    let shake = setInterval(() => {
+        let x = Math.random() * 10 - 5;
+        let y = Math.random() * 10 - 5;
+        document.body.style.transform = `translate(${x}px, ${y}px)`;
+
+        if (Date.now() - start > 300) {
+            clearInterval(shake);
+            document.body.style.transform = "translate(0,0)";
+        }
+    }, 20);
+
+    // remove flash after short time
+    setTimeout(() => {
+        flash.remove();
+    }, 150);
+}
